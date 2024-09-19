@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const Signup = () => {
   const router = useRouter();
   const handleContinue = () => {
-    router.push(`/createpassword`);
+    router.push(`/signup/createpassword`);
   };
 
   const [inputValue, setInputValue] = useState('');

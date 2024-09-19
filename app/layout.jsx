@@ -1,8 +1,8 @@
-import "@styles/globals.css";
+import "../styles/globals.css";
 
-import Nav from "@components/Nav";
-import Provider from "@components/Provider";
-import Ball from "@components/Ball";
+import Nav from "../components/Nav";
+import Provider from "../components/Provider";
+import Ball from "../components/Ball";
 
 export const metadata = {
   title: "vconnect",
@@ -20,10 +20,10 @@ const RootLayout = ({ children }) => {
           </div>
 
           <main className="app">
-            <Nav />
+            
             {children}
           </main>
-          <Ball />
+          
         </Provider>
       </body>
     </html>
