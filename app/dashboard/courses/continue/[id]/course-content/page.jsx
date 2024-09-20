@@ -13,9 +13,24 @@ import Modal from "react-modal";
 const page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const title = searchParams.get("title");
-  const imgSrc = searchParams.get("imgSrc");
-  const { id } = useParams(); // This will correctly extract the dynamic id from the URL
+  //const title = searchParams.get("title");
+  //const imgSrc = searchParams.get("imgSrc");
+  //const { id } = useParams(); // This will correctly extract the dynamic id from the URL
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [selectedFile, setSelectedFile] = useState(null); // State to manage selected file
+  const [fileStatus, setFileStatus] = useState("pending"); // State to track file processing status
+
+  // Function to handle file selection
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setFileStatus("processing"); // Set status to processing after file selection
+
+    // Simulate file upload process
+    setTimeout(() => {
+      setFileStatus("successful"); // Set status to successful after file processing
+      setIsModalOpen(false); // Close modal after file selection
+    }, 2000); // Simulate a 2-second file upload process
+  };
 
   const [sections, setSections] = useState([
     {
@@ -187,62 +202,172 @@ const page = () => {
               {section.lectures.map((lecture) => (
                 <div
                   key={lecture.id}
-                  className="flex justify-between items-center justify-items-center bg-white border-black border p-3 mb-4 rounded-sm"
+                  className="flex flex-col bg-white border-black border p-3 mb-4 rounded-sm"
                 >
-                  <div className="flex flex-row items-center">
+                  {/* Lecture Info */}
+                  <div className="flex justify-between items-center">
                     <div className="flex flex-row items-center">
+                      <div className="flex flex-row items-center">
+                        <Image
+                          src="/assets/check-black.png"
+                          width={24}
+                          height={24}
+                          alt="check"
+                        />
+                        <p className="text-lg ml-1">
+                          <span className="font-medium text-black text-[20px]">
+                            Lecture {lecture.id}:
+                          </span>
+                        </p>
+                      </div>
+                      <div className="flex flex-row ml-2 items-center">
+                        <Image
+                          src="/assets/file-preview.png"
+                          width={24}
+                          height={24}
+                          alt="file preview"
+                          className="w-[24px] h-[24px]"
+                        />
+                        <p className="text-black font-medium text-[20px]">
+                          {lecture.title}
+                        </p>
+                      </div>
+                      <div className="flex space-x-1 ml-2">
+                        <MdOutlineEdit className="cursor-pointer text-xl text-black" />
+                        <BsFillTrashFill className="cursor-pointer text-xl text-black" />
+                      </div>
+                    </div>
+                    {/* + Content Button */}
+                    <div className="flex flex-row items-center gap-2">
+                      <div
+                        onClick={() => setIsModalOpen(true)} // Open modal on click
+                        className="flex bg-white items-center gap-2 cursor-pointer border-black border p-3  rounded-sm h-[45px] w-[141px]"
+                      >
+                        <Image
+                          src="/assets/add-black.png"
+                          width={24}
+                          height={24}
+                          className="w-[24px] h-[24px]"
+                        />
+                        <p className="text-black font-medium text-[20px]">
+                          Content
+                        </p>
+                      </div>
                       <Image
-                        src="/assets/check-black.png"
+                        src="/assets/keyboard_arrow_down.png"
                         width={24}
                         height={24}
-                        alt="check"
+                        className="w-[24px] h-[24px] cursor-pointer"
+                        alt="dropdown"
                       />
-                      <p className="text-lg ml-1">
-                        <span className="font-medium text-black text-[20px]">
-                          Lecture {lecture.id}:
-                        </span>
-                      </p>
-                    </div>
-                    <div className="flex flex-row ml-2 items-center">
-                      <Image
-                        src="/assets/file-preview.png"
-                        width={24}
-                        height={24}
-                        alt="file preview"
-                        className="w-[24px] h-[24px]"
-                      />
-                      <p className="text-black font-medium text-[20px]">
-                        {lecture.title}
-                      </p>
-                    </div>
-                    <div className="flex space-x-1 ml-2">
-                      <MdOutlineEdit className="cursor-pointer text-xl text-black" />
-                      <BsFillTrashFill className="cursor-pointer text-xl text-black" />
                     </div>
                   </div>
-                  <div className="flex flex-row items-center gap-2">
-                    <div className="flex bg-white items-center gap-2 cursor-pointer border-black border p-3  rounded-sm h-[45px] w-[141px]">
-                      <Image
-                        src="/assets/add-black.png"
-                        width={24}
-                        height={24}
-                        className="w-[24px] h-[24px]"
-                      />
-                      <p className="text-black font-medium text-[20px]">
-                        Content
-                      </p>
-                    </div>
 
-                    <Image
-                      src="/assets/keyboard_arrow_down.png"
-                      width={24}
-                      height={24}
-                      className="w-[24px] h-[24px] cursor-pointer"
-                      alt="dropdown"
-                    />
+                  {/* File Status Section */}
+                  <div className="mt-4 flex flex-row items-center">
+                    <div className="flex flex-col justify-center items-start">
+                      {/* Show the processing or success message based on file status */}
+                      {fileStatus === "processing" && (
+                        <div className="flex flex-row items-center justify-center gap-3">
+                          <Image
+                            src="/assets/image-process.png"
+                            width={150}
+                            height={50}
+                            className="w-[171px] h-[72px]"
+                          />
+                          <p className="text-red-500 font-medium">
+                            Processing...
+                          </p>
+                        </div>
+                      )}
+                      {fileStatus === "successful" && (
+                        <div className="flex flex-row items-center justify-center gap-3">
+                          <Image
+                            src="/assets/image-process.png"
+                            width={150}
+                            height={50}
+                            className="w-[171px] h-[72px]"
+                          />
+                          <div className="flex flex-col">
+                            <p className="text-[#0AA564] font-medium">
+                              Successful
+                            </p>
+                            <div className="flex items-center">
+                              <MdOutlineEdit className="cursor-pointer text-lg text-black mr-2" />
+                              <p
+                                onClick={() => setIsModalOpen(true)}
+                                className="text-black font-medium cursor-pointer"
+                              >
+                                Edit Content
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
+
+              {/* Modal for uploading PDF */}
+              {isModalOpen && (
+                <motion.div
+                  className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="bg-white rounded-xl p-8 w-[500px]">
+                    <div className="flex justify-start">
+                      <button
+                        onClick={() => setIsModalOpen(false)}
+                        className="text-lg"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                    <h2 className="text-center text-lg font-semibold mb-1">
+                      Upload a PDF file
+                    </h2>
+
+                    <div className="p-6 flex flex-col justify-center items-center">
+                      <div className="border-1 border-[#828282] flex flex-col justify-center w-full h-[206px] items-center bg-[#EEEFF4]">
+                        <Image
+                          src="/assets/pdf-icon.png" // Use a PDF icon image if available
+                          alt="PDF Icon"
+                          width={50}
+                          height={50}
+                          className="mb-4"
+                        />
+                        <p className="text-[24px] mb-2 text-black font-medium">
+                          PDF
+                        </p>
+                      </div>
+                      <div className="flex flex-row justify-center items-center mt-3">
+                        <p className="text-black font-normal text-[20px]">
+                          Drag and drop a pdf or {" "}
+                        </p>
+                        <label className="text-blue-600 underline cursor-pointer">
+                          {" "}
+                          select a file
+                          <input
+                            type="file"
+                            accept=".pdf"
+                            className="hidden"
+                            onChange={handleFileChange}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    {selectedFile && (
+                      <p className="mt-4 text-center text-sm text-gray-600">
+                        Selected file: {selectedFile.name}
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+              )}
 
               {/* Quizzes */}
               {section.quizzes.map((quiz) => (
@@ -536,8 +661,9 @@ const page = () => {
           {/* Submit Button */}
           <div className="mt-[64px] flex justify-center">
             <button
-              onClick={handleSubmit} 
-              className="bg-primary text-white py-3 px-8 rounded-full text-lg font-semibold">
+              onClick={handleSubmit}
+              className="bg-primary text-white py-3 px-8 rounded-full text-lg font-semibold"
+            >
               Submit for Review
             </button>
           </div>

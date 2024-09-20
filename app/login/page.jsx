@@ -32,12 +32,13 @@ const Login = () => {
             <a href="#" className="text-sm text-[#B22222] hover:underline">Forgot Password?</a>
           </div>
           <div className="flex items-center justify-between ml-5 mr-5">
-            <button
+            <Link
+              href="/welcome"
               className="bg-gray-300 text-[#A0A0A0] font-bold py-3 px-10 focus:outline-none focus:shadow-outline rounded-full"
               type="button"
             >
               Login
-            </button>
+            </Link>
             <Link
               href="/signup"
               className="bg-white text-[#000000] font-bold py-3 px-10 rounded-full border-2 border-[#B22222] hover:bg-[#B22222] hover:text-white transition focus:outline-none focus:shadow-outline"
