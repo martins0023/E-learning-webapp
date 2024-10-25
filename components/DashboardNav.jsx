@@ -1,7 +1,13 @@
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const DashboardNav = () => {
+  
+  const handleNavProfile = () => {
+
+  }
   return (
     <header className="flex items-center justify-between mb-8 pt-9 mr-5 ml-5">
       <div className="relative flex items-center w-full max-w-xl h-[52px] bg-white rounded-full p-3 border-black border-[1px]">
@@ -15,7 +21,7 @@ const DashboardNav = () => {
       <button className="bg-primary text-white rounded-md h-[41px] px-6 py-2">
         Start the Class
       </button>
-      <div className="flex items-center">
+      <Link href="/dashboard/profile" className="flex items-center cursor-pointer">
         <div className="relative mr-4">
           <span className="absolute top-0 right-0 w-4 h-4 bg-primary rounded-full flex items-center justify-center text-xs text-white">
             5
@@ -32,13 +38,13 @@ const DashboardNav = () => {
           <Image
             src="/assets/images/profile.jpg"
             alt="Dr. James Adetola"
-            width={60}
-            height={60}
+            width={50}
+            height={50}
             className="rounded-full"
           />
           <p className="ml-2 text-black font-semibold">Dr. James Adetola</p>
         </div>
-      </div>
+      </Link>
     </header>
   );
 };

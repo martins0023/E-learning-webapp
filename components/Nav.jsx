@@ -13,7 +13,7 @@ const Nav = () => {
   };
 
   const handleSignup = () => {
-    router.push(`/signup`);
+    router.push(`/role`);
   };
   //const isUserLoggedIn = true;
   const { data: session } = useSession();
