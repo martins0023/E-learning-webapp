@@ -53,7 +53,13 @@ const Role = () => {
       <div className="mt-10">
         {/* Conditionally enable the Continue button based on selection */}
         <Link
-          href={buttonEnabled ? "/signup" : "#"}
+          href={
+            buttonEnabled
+              ? selectedRole === "Student"
+                ? "/student/signup"
+                : "/signup"
+              : "#"
+          }
           className={`flex items-center justify-center text-[#A0A0A0] font-normal text-[20px] w-[550px] rounded-full h-[64px] 
           ${buttonEnabled ? "bg-primary text-white" : "bg-[#E4E4E4] cursor-not-allowed"}`}
         >
