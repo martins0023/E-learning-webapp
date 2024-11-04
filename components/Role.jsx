@@ -35,18 +35,44 @@ const Role = () => {
         <div
           onClick={() => handleRoleClick("Student")}
           className={`cursor-pointer rounded-md h-[380px] w-[260px] flex items-center justify-center border-[1px] 
-          ${selectedRole === "Student" ? "bg-gradient-to-r from-[#65E2B5] to-[#BCFF9D] border-none" : "bg-[#EEEFF4] border-black"}`}
+          ${
+            selectedRole === "Student"
+              ? "bg-gradient-to-r from-[#65E2B5] to-[#BCFF9D] border-none"
+              : "bg-[#EEEFF4] border-black"
+          }`}
         >
-          <p className="text-black font-semibold text-[24px]">Student</p>
+          <div className="flex flex-col gap-3 items-center justify-center justify-items-center">
+            <Image
+              src="/assets/student-icon.png"
+              width={95}
+              height={66}
+              className="w-[95px] h-[66px]"
+              alt="lecturer"
+            />
+            <p className="text-black font-semibold text-[24px]">Student</p>
+          </div>
         </div>
 
         {/* Lecturer Role */}
         <div
           onClick={() => handleRoleClick("Lecturer")}
           className={`cursor-pointer rounded-md h-[380px] w-[260px] flex items-center justify-center border-[1px] 
-          ${selectedRole === "Lecturer" ? "bg-gradient-to-r from-[#65E2B5] to-[#BCFF9D] border-none" : "bg-[#EEEFF4] border-black"}`}
+          ${
+            selectedRole === "Lecturer"
+              ? "bg-gradient-to-r from-[#65E2B5] to-[#BCFF9D] border-none"
+              : "bg-[#EEEFF4] border-black"
+          }`}
         >
-          <p className="text-black font-semibold text-[24px]">Lecturer</p>
+          <div className="flex flex-col gap-3 items-center justify-center justify-items-center">
+            <Image
+              src="/assets/lecturer-icon.png"
+              width={95}
+              height={66}
+              className="w-[95px] h-[66px]"
+              alt="lecturer"
+            />
+            <p className="text-black font-semibold text-[24px]">Lecturer</p>
+          </div>
         </div>
       </div>
 
@@ -56,12 +82,16 @@ const Role = () => {
           href={
             buttonEnabled
               ? selectedRole === "Student"
-                ? "/student/signup"
+                ? "/student/getstarted"
                 : "/signup"
               : "#"
           }
           className={`flex items-center justify-center text-[#A0A0A0] font-normal text-[20px] w-[550px] rounded-full h-[64px] 
-          ${buttonEnabled ? "bg-primary text-white" : "bg-[#E4E4E4] cursor-not-allowed"}`}
+          ${
+            buttonEnabled
+              ? "bg-primary text-white"
+              : "bg-[#E4E4E4] cursor-not-allowed"
+          }`}
         >
           Continue
         </Link>

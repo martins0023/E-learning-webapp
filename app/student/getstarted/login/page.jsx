@@ -1,23 +1,30 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const router = useRouter();
   const handleContinue = () => {
-    router.push(`/signup/createpassword`);
+    router.push(`/student`);
   };
 
   const handleLogin = () => {
-    router.push(`/login`);
+    router.push(`/student/getstarted/login`);
   };
 
   const handleSignup = () => {
-    router.push(`/signup`);
+    router.push(`/student/getstarted`);
   };
+  
+  // Password states
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
+  // Password strength states
+  
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   // Function to handle input change
   const handleInputChange = (event) => {
@@ -29,34 +36,40 @@ const Signup = () => {
       <div className="w-1/2 flex flex-col justify-center items-center p-10 bg-[#F9F9F9]">
         <img src="/assets/logo.png" alt="vconnet" className="mb-6" />
         <h1 className="text-3xl font-bold text-[#B22222] mb-2">
-          You are Welcome!
+          Welcome Back!
         </h1>
         <p className="text-sm text-primary mb-8">
-          Please{" "}
-          <span onClick={handleLogin} className="underline cursor-pointer">
-            login
-          </span>
-          /
-          <span onClick={handleSignup} className="underline cursor-pointer">
-            Signup
-          </span>{" "}
-          to your account.
+          Please <span onClick={handleLogin} className="underline cursor-pointer">login</span>/<span onClick={handleSignup} className="underline cursor-pointer">Signup</span> to your account.
         </p>
         <form className="w-full max-w-md">
-          <p
-            className="block text-gray-700 text-sm font-bold mb-2 text-center text-[18px]"
-            htmlFor="staff-id"
-          >
-            Please enter your Staff Identity number
+          <p className="block text-gray-700 text-sm font-bold mb-2 text-center text-[18px]">
+            Please enter your matriculation number
           </p>
           <input
             className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
-            id="staff-id"
+            id="matric-id"
             type="text"
-            placeholder="Enter Staff ID"
+            placeholder="Enter matric number"
             value={inputValue}
             onChange={handleInputChange}
           />
+
+          <input
+            className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
+            id="password-id"
+            type="password"
+            placeholder="Enter your password"
+          />
+          <div className="flex justify-between items-center">
+            <div className="gap-2 flex justify-between">
+              <input type="checkbox" id="checkbox" className="" />
+              <p className="text-[#0000005b] text-[12px]">Remember Me</p>
+            </div>
+
+            <div className="cursor-pointer">
+              <p className="text-[#0000005b] text-[12px]">Forgot Password?</p>
+            </div>
+          </div>
 
           <div className="flex items-center justify-center mt-5">
             <button
@@ -68,7 +81,7 @@ const Signup = () => {
               type="button"
               onClick={handleContinue}
             >
-              Continue
+              Login
             </button>
           </div>
         </form>

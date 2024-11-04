@@ -2,8 +2,8 @@
 import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import Sidebar from "../../components/Sidebar";
-import DashboardNav from "../../components/DashboardNav";
+import Sidebar from "../../../../components/Sidebar";
+import DashboardNav from "../../../../components/DashboardNav";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -21,7 +21,7 @@ const InboxPage = () => {
 
   const router = useRouter();
   const navigateToInbox = (type) => {
-    router.push("/student/inbox"); // Navigate to the provided type URL
+    router.push("/dashboard/inbox"); // Navigate to the provided type URL
   };
 
   const handleQuillChange = (value) => {

@@ -1,28 +1,12 @@
-"use client"
 import Image from "next/image";
 import React from "react";
-import { useRouter } from "next/navigation";
+import Sidebar from "../components/Sidebar";
 
 const page = () => {
-  const router = useRouter();
-  const createCourse = () => {
-    router.push("/dashboard/getstarted")
-  }
-
-  const navHome = () => {
-    router.push("/dashboard")
-  }
   return (
     <section>
-      <header className="flex items-center justify-between mb-8 pt-9 mr-5 ml-5">
-        <div onClick={navHome} className="cursor-pointer">
-          <Image
-            src="/assets/logo.png"
-            alt="vconnect"
-            width={183}
-            height={66}
-          />
-        </div>
+      <Sidebar />
+      <header className="flex items-center justify-between mb-8 pt-9 mr-5 ml-[300px]">
         <div className="relative flex items-center w-full max-w-xl h-[52px] bg-white rounded-full p-3 border-black border-[1px]">
           <Image src="/assets/search.png" width={18} height={18} alt="search" />
           <input
@@ -31,7 +15,7 @@ const page = () => {
             className="flex-grow px-4 py-2 outline-none text-[16px] font-medium border-black border-1"
           />
         </div>
-        <button onClick={createCourse} className="bg-primary text-white rounded-md h-[41px] px-6 py-2">
+        <button className="bg-primary text-white rounded-md h-[41px] px-6 py-2">
           Create New Class/Event
         </button>
         <div className="flex items-center cursor-pointer">
@@ -60,7 +44,7 @@ const page = () => {
         </div>
       </header>
 
-      <div className="p-20">
+      <div className="p-10 ml-[250px]">
         <div className="flex flex-row justify-between">
           <div className="flex flex-col">
             <Image
@@ -70,9 +54,7 @@ const page = () => {
               className="w-[200px] h-[200px] rounded-full"
             />
 
-            <p className="text-black font-bold text-[30px] mt-4">
-              Dr. Ajibade Solomon{" "}
-            </p>
+            <p className="text-black font-bold text-[30px] mt-4">James Oye </p>
             <p className="text-black font-medium text-[20px]">Lecturer </p>
 
             <div className="mt-4">
@@ -98,18 +80,26 @@ const page = () => {
           </div>
 
           <div className="flex justify-center flex-col gap-3">
-            <p className="font-bold text-[20px]">My courses (2)</p>
+            <p className="font-bold text-[20px]">courses offering (2)</p>
 
             <div className="flex flex-row gap-3">
               <div className="flex flex-col">
                 <Image src="/assets/cys341.png" width={306} height={256} />
-                <p className="text-black font-bold text-[18px] w-[286px]">(COM301) Introduction to Cyber Security</p>
-                <p className="text-black font-normal text-[14px] mt-1 w-[286px]">Lorem ipsum dolor sit amet, consetur adipiscing elit.</p>
+                <p className="text-black font-bold text-[18px] w-[286px]">
+                  (COM301) Introduction to Cyber Security
+                </p>
+                <p className="text-black font-normal text-[14px] mt-1 w-[286px]">
+                  Lorem ipsum dolor sit amet, consetur adipiscing elit.
+                </p>
               </div>
               <div className="flex flex-col">
                 <Image src="/assets/cys321.png" width={306} height={256} />
-                <p className="text-black font-bold text-[18px] w-[286px]">(COM421) AI: The Future of Cyber Security</p>
-                <p className="text-black font-normal text-[14px] mt-1 w-[286px]">Lorem ipsum dolor sit amet, consetur adipiscing elit.</p>
+                <p className="text-black font-bold text-[18px] w-[286px]">
+                  (COM421) AI: The Future of Cyber Security
+                </p>
+                <p className="text-black font-normal text-[14px] mt-1 w-[286px]">
+                  Lorem ipsum dolor sit amet, consetur adipiscing elit.
+                </p>
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const Nav = () => {
   const router = useRouter();
   const handleLogin = () => {
-    router.push(`/login`);
+    router.push(`/role`);
   };
 
   const handleSignup = () => {

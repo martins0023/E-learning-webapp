@@ -12,6 +12,14 @@ const Dashboard = () => {
     router.push(`/student/attendance`);
   };
 
+  const JoinClass = (id) => {
+    router.push(`/student/courses/classroom/${id}/start`);
+  };
+
+  const ViewDetails = (id) => {
+    router.push(`/student/courses/${id}`);
+  };
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -94,10 +102,10 @@ const Dashboard = () => {
                             <p className="text-white font-normal text-[12px]">{`${lecture.date}`}</p>
                           </div>
                           <div className="flex justify-between mt-4">
-                            <button className="text-[12px] bg-white w-[105px] rounded-sm h-[27px] text-primary justify-items-center text-center items-center">
+                            <button onClick={JoinClass} className="text-[12px] bg-white w-[105px] rounded-sm h-[27px] text-primary justify-items-center text-center items-center">
                               Join the Class
                             </button>
-                            <button className="text-white text-[10px]">
+                            <button onClick={ViewDetails} className="text-white text-[10px]">
                               View Details
                             </button>
                           </div>

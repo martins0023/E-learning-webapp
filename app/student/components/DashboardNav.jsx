@@ -21,7 +21,7 @@ const DashboardNav = () => {
       <button className="bg-primary text-white rounded-md h-[41px] px-6 py-2">
         Start the Class
       </button>
-      <Link href="/dashboard/profile" className="flex items-center cursor-pointer">
+      <Link href="/student/profile" className="flex items-center cursor-pointer">
         <div className="relative mr-4">
           <span className="absolute top-0 right-0 w-4 h-4 bg-primary rounded-full flex items-center justify-center text-xs text-white">
             5

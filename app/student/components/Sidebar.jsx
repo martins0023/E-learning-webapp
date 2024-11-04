@@ -46,10 +46,9 @@ const Sidebar = () => {
             { name: 'Time Table', path: '/student/time-table', icon: '/assets/timetable-icon.png' },
             { name: 'Inbox', path: '/student/inbox', icon: '/assets/timetable-icon.png' },
             { name: 'Submissions', path: '/student/submissions', icon: '/assets/submissions-icon.png' },
-            { name: 'All Students', path: '/dashboard/all-students', icon: '/assets/students-icon.png' },
             { name: 'Group', path: '/student/group', icon: '/assets/students-icon.png' },
-            { name: 'Quiz', path: '/dashboard/quiz', icon: '/assets/quiz-icon.png' },
-            { name: 'Settings', path: '/dashboard/settings', icon: '/assets/settings-icon.png' },
+            { name: 'Quiz', path: '/student/quiz', icon: '/assets/quiz-icon.png' },
+            { name: 'Settings', path: '/student/profile', icon: '/assets/settings-icon.png' },
           ].map((item, index) => (
             <li key={index} className="relative">
               <Link
@@ -58,7 +57,7 @@ const Sidebar = () => {
                 onMouseLeave={handleMouseLeave}
                 className={`flex items-center py-3 px-6 transition-colors ${
                   active === item.path
-                    ? 'text-white bg-black hover:bg-[#0000002a] hover:rounded-full'
+                    ? 'text-white bg-black hover:bg-[#0000002a] hover:rounded-none'
                     : 'text-black hover:text-primary hover:bg-slate-400'
                 }`}
               >
@@ -78,8 +77,12 @@ const Sidebar = () => {
           src="/assets/diploma.png"
           width={177}
           height={162}
-          className="mb-10"
+          className="mb-5"
         />
+        <Link
+          href="/"
+          className="W-[177PX] flex justify-center items-center text-black underline font-medium"
+        >Logout</Link>
       </nav>
     </aside>
   );

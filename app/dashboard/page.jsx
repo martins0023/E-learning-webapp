@@ -12,6 +12,14 @@ const Dashboard = () => {
     router.push(`/dashboard/getstarted`);
   };
 
+  const JoinClass = () => {
+    router.push(`/dashboard/getstarted`);
+  };
+
+  const ViewDetails = () => {
+    router.push(`/dashboard/getstarted`);
+  };
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

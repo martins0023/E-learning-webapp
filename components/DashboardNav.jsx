@@ -1,12 +1,17 @@
+"use client"
 import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const DashboardNav = () => {
-  
+  const router = useRouter();
   const handleNavProfile = () => {
+    router.push("/dashboard/profile")
+  }
 
+  const createCourse = () => {
+    router.push("/dashboard/courses")
   }
   return (
     <header className="flex items-center justify-between mb-8 pt-9 mr-5 ml-5">
@@ -34,7 +39,7 @@ const DashboardNav = () => {
             height={48}
           />
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center cursor-pointer" onClick={handleNavProfile}>
           <Image
             src="/assets/images/profile.jpg"
             alt="Dr. James Adetola"

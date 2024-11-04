@@ -9,7 +9,7 @@ import Ball from "../components/Ball";
 const Home = () => {
   const router = useRouter();
   const handleLogin = () => {
-    router.push(`/login`);
+    router.push(`/role`);
   };
   return (
     <section>

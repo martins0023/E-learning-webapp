@@ -1,13 +1,34 @@
+"use client"
 import Link from 'next/link';
 import React from 'react';
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push(`/login`);
+  };
+
+  const handleSignup = () => {
+    router.push(`/signup`);
+  };
   return (
     <section className="flex h-screen bg-[#F9F9F9]">
       <div className="w-1/2 flex flex-col justify-center items-center p-10 bg-[#F9F9F9]">
         <img src="/assets/logo.png" alt="vconnet" className="mb-6" />
         <h1 className="text-3xl font-bold text-[#B22222] mb-2">Welcome back!</h1>
-        <p className="text-sm text-primary mb-8">Please login/Signup to your account.</p>
+        <p className="text-sm text-primary mb-8">
+          Please{" "}
+          <span onClick={handleLogin} className="underline cursor-pointer">
+            login
+          </span>
+          /
+          <span onClick={handleSignup} className="underline cursor-pointer">
+            Signup
+          </span>{" "}
+          to your account.
+        </p>
         <form className="w-full max-w-md">
           <p className="block text-gray-700 text-sm font-bold mb-2 text-center text-[18px]" htmlFor="staff-id">
             Please enter your Staff Identity number
@@ -34,7 +55,7 @@ const Login = () => {
           <div className="flex items-center justify-between ml-5 mr-5">
             <Link
               href="/welcome"
-              className="bg-gray-300 text-[#A0A0A0] font-bold py-3 px-10 focus:outline-none focus:shadow-outline rounded-full"
+              className="bg-primary text-[#ffffff] font-bold py-3 px-10 focus:outline-none focus:shadow-outline rounded-full"
               type="button"
             >
               Login

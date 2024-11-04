@@ -49,7 +49,7 @@ const Sidebar = () => {
             { name: 'All Students', path: '/dashboard/all-students', icon: '/assets/students-icon.png' },
             { name: 'Group', path: '/dashboard/group', icon: '/assets/students-icon.png' },
             { name: 'Quiz', path: '/dashboard/quiz', icon: '/assets/quiz-icon.png' },
-            { name: 'Settings', path: '/dashboard/settings', icon: '/assets/settings-icon.png' },
+            { name: 'Settings', path: '/dashboard/profile', icon: '/assets/settings-icon.png' },
           ].map((item, index) => (
             <li key={index} className="relative">
               <Link
@@ -58,7 +58,7 @@ const Sidebar = () => {
                 onMouseLeave={handleMouseLeave}
                 className={`flex items-center py-3 px-6 transition-colors ${
                   active === item.path
-                    ? 'text-white bg-black hover:bg-[#0000002a] hover:rounded-full'
+                    ? 'text-white bg-black hover:bg-[#0000002a] hover:rounded-none'
                     : 'text-black hover:text-primary hover:bg-slate-400'
                 }`}
               >
@@ -80,6 +80,10 @@ const Sidebar = () => {
           height={162}
           className="mb-10"
         />
+        <Link
+          href="/"
+          className="W-[177PX] flex justify-center items-center text-black underline font-medium"
+        >Logout</Link>
       </nav>
     </aside>
   );

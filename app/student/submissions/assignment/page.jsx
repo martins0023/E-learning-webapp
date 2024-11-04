@@ -1,20 +1,25 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import DashboardNav from "../components/DashboardNav";
-import Sidebar from "../components/Sidebar";
+import DashboardNav from "../../components/DashboardNav";
+import Sidebar from "../../components/Sidebar";
 import { useRouter } from "next/navigation";
 
 const submissionType = [
   {
     id: 1,
-    submissionName: "Assignment Submission",
-    type: "/student/submissions/assignment",
+    submissionName: "Individual Submission",
+    type: "/student/submissions/assignment/individual",
   },
   {
     id: 2,
-    submissionName: "Project Submission",
-    type: "/student/submissions/project",
+    submissionName: "Group Submission",
+    type: "/student/submissions/assignment/group",
+  },
+  {
+    id: 3,
+    submissionName: "Submission Status",
+    type: "/student/submissions/assignment/status",
   },
 ];
 

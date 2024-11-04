@@ -2,30 +2,30 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import DashboardNav from "../../components/DashboardNav";
-import Sidebar from "../../components/Sidebar";
+import DashboardNav from "../../../components/DashboardNav";
+import Sidebar from "../../../components/Sidebar";
 import { AiOutlineFilePdf, AiOutlineCheckCircle } from "react-icons/ai";
 
 const studentGroup = [
-    {
-      id: 1,
-      studentName: "Ojo Oyewole",
-      studentMatric: "CS/HND/F22/3260",
-      image: "/assets/images/profile.jpg"
-    },
-    {
-      id: 2,
-      studentName: "Sarah Bouchard",
-      studentMatric: "CS/HND/F22/3260",
-      image: "/assets/images/profile.jpg"
-    },
-    {
-      id: 3,
-      studentName: "Miracle Abidemi",
-      studentMatric: "CS/HND/F22/3260",
-      image: "/assets/images/profile.jpg"
-    },
-  ];
+  {
+    id: 1,
+    studentName: "Ojo Oyewole",
+    studentMatric: "CS/HND/F22/3260",
+    image: "/assets/images/profile.jpg",
+  },
+  {
+    id: 2,
+    studentName: "Sarah Bouchard",
+    studentMatric: "CS/HND/F22/3260",
+    image: "/assets/images/profile.jpg",
+  },
+  {
+    id: 3,
+    studentName: "Miracle Abidemi",
+    studentMatric: "CS/HND/F22/3260",
+    image: "/assets/images/profile.jpg",
+  },
+];
 
 const Page = () => {
   const [file, setFile] = useState(null);
@@ -100,7 +100,7 @@ const Page = () => {
           <div className="flex flex-row gap-[40px]">
             <div className="flex flex-col">
               <h1 className="text-[32px] font-semibold mb-4">
-                Cyber Security Group Assignment
+                Project Group Submission
               </h1>
               <div className="text-primary text-[16px] mb-6">
                 <p className="text-[16px]">Group A</p>
@@ -216,8 +216,12 @@ const Page = () => {
                       alt="profile"
                     />
                     <div className="flex flex-col">
-                    <p className="font-semibold text-[20px]">{students.studentName}</p>
-                    <p className="font-normal text-[14px]">{students.studentMatric}</p>
+                      <p className="font-semibold text-[20px]">
+                        {students.studentName}
+                      </p>
+                      <p className="font-normal text-[14px]">
+                        {students.studentMatric}
+                      </p>
                     </div>
                   </div>
                 ))}

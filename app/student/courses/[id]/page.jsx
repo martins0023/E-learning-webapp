@@ -24,6 +24,11 @@ const CourseDetails = ({ params }) => {
     router.push(`/student/courses/classroom/${id}`);
   };
 
+  const navigateToLecturer = () => {
+    //router.push(`/dashboard/profile/${id}`);
+    router.push(`/dashboard/profile`);
+  };
+
   const course = {
     id: 1,
     courseName: "(CYS 311) Introduction to Security and Policy Development",
@@ -31,10 +36,10 @@ const CourseDetails = ({ params }) => {
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     content: [
-      { title: "Course Overview", details: "Details for Course Overview." },
-      { title: "Cybersecurity Introduction", details: "Details for Cybersecurity Introduction." },
-      { title: "Cyber Attacks", details: "Details for Cyber Attacks." },
-      { title: "Cyber Defenses", details: "Details for Cyber Defenses." },
+      { title: "Course Overview", details: "This course contains of the overview needed fo the introduction and getting started of this course." },
+      { title: "Cybersecurity Introduction", details: "courseIntro.mp4" },
+      { title: "Cyber Attacks", details: "SQLtest.injection" },
+      { title: "Cyber Defenses", details: "cyber labs practice." },
     ],
   };
 
@@ -102,10 +107,10 @@ const CourseDetails = ({ params }) => {
                     >
                       <p className="font-medium text-[16px]">{section.title}</p>
                       <Image
-                        src={expandedSections[index] ? "/assets/minus-black.png" : "/assets/add-black.png"}
+                        src={expandedSections[index] ? "/assets/collapse.png" : "/assets/add-black.png"}
                         width={14}
                         height={14}
-                        className="w-[14px] h-[14px]"
+                        className=""
                         alt={expandedSections[index] ? "collapse" : "expand"}
                       />
                     </div>
@@ -154,7 +159,7 @@ const CourseDetails = ({ params }) => {
                   <p className="font-bold mt-1">show more</p>
                 </div>
               </div>
-              <button className="flex flex-row gap-3 items-center mt-4 p-2 bg-outline border border-black justify-center h-[56px] text-black w-full">
+              <button onClick={navigateToLecturer} className="flex flex-row gap-3 items-center mt-4 p-2 bg-outline border border-black justify-center h-[56px] text-black w-full">
                 View Profile
               </button>
             </div>

@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import DashboardNav from "../../components/DashboardNav";
-import Sidebar from "../../components/Sidebar";
+import DashboardNav from "../../../components/DashboardNav";
+import Sidebar from "../../../components/Sidebar";
 import { useRouter } from "next/navigation";
 
 const courseActivitysData = [
