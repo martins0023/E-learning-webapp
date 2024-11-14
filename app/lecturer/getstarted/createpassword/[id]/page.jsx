@@ -56,7 +56,7 @@ const CreatePassword = () => {
   // Handle continue action when both conditions are satisfied
   const handleContinue = () => {
     if (isFormValid) {
-      router.push(`/welcome`);
+      router.push(`/lecturer/getstarted/welcome/123`);
     }
   };
 

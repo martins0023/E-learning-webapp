@@ -34,10 +34,10 @@ const Welcome = () => {
       </div>
       <div className="mt-5">
         <Link
-          href="/dashboard"
+          href="/lecturer/getstarted/login"
           className="flex items-center justify-center bg-primary text-white font-normal text-[20px] w-[691px] rounded-full h-[64px]"
         >
-          Go to Dashboard
+          Go to Login
         </Link>
       </div>
     </div>

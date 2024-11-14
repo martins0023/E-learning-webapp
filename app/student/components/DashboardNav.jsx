@@ -1,10 +1,42 @@
+"use client"
+
 import Image from "next/image";
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { getUserId } from "../../../utils/session";
+import { GetApi } from "../../../utils/Actions";
 
 const DashboardNav = () => {
   
+  const [user, setUser] = useState({})
+const [fetch, setFetch] = useState(false)
+const params = useParams();
+  useEffect(() => {
+    const getId = async () => {
+    //   const id = await getUserId();
+    //  if(id) {
+        try {
+          const response = await GetApi(`api/student/${params.id}`);
+          if (response.success) {
+            setUser(response.data)
+            setFetch(true);
+          } else {
+            setFetch(false);
+            // setErrorMsg(response.message);
+          }
+        } catch (err) {
+          setFetch(false);
+          console.log(err)
+          // setErrorMsg(err.message);
+        }
+    }
+
+    getId();
+  }, [])
+
+  console.log(fetch)
+
   const handleNavProfile = () => {
 
   }

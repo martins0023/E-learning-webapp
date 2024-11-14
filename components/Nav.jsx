@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+// import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const Nav = () => {
@@ -16,20 +16,20 @@ const Nav = () => {
     router.push(`/role`);
   };
   //const isUserLoggedIn = true;
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  const [providers, setProviders] = useState(null);
+  // const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
+  // useEffect(() => {
+  //   const setUpProviders = async () => {
+  //     const response = await getProviders();
 
-      setProviders(response);
-    };
+  //     setProviders(response);
+  //   };
 
-    setUpProviders();
-  }, []);
+  //   setUpProviders();
+  // }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -45,7 +45,7 @@ const Nav = () => {
 
       {/* Desktop nav */}
       <div className="sm:flex hidden">
-        {session?.user ? (
+        {/* {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -65,10 +65,10 @@ const Nav = () => {
               />
             </Link>
           </div>
-        ) : (
+        ) : ( */}
           <>
-            {providers &&
-              Object.values(providers).map((provider) => (
+            {/* {providers &&
+              Object.values(providers).map((provider) => ( */}
                 <div className="flex gap-3 md:gap-5">
                   <div className="flex-between justify-evenly gap-14 mr-5">
                     <Link href="" className="text-[#626262]">Features</Link>
@@ -94,15 +94,16 @@ const Nav = () => {
                     Sign Up
                   </button>
                 </div>
-              ))}
+              {/* ))
+              } */}
           </>
-        )}
+        {/* )} */}
       </div>
 
       {/* MOBILE NAV BAR */}
       <div className="sm:hidden flex relative">
-        {session?.user ? (
-          <div className="flex">
+        {/* {session?.user ? ( */}
+          {/* <div className="flex">
             <Image
               src={session?.user.image}
               width={37}
@@ -140,22 +141,23 @@ const Nav = () => {
                 </button>
               </div>
             )}
-          </div>
-        ) : (
+          </div> */}
+        {/* ) : ( */}
           <>
-            {providers &&
-              Object.values(providers).map((provider) => (
+            {/* {providers &&
+              Object.values(providers).map((provider) => ( */}
                 <button
                   type="button"
-                  key={provider.name}
+                  // key={provider.name}
                   onClick={handleSignup}
                   className="brown_btn"
                 >
                   Sign In
                 </button>
-              ))}
+              {/* ))
+              } */}
           </>
-        )}
+        {/* )} */}
       </div>
     </nav>
   );

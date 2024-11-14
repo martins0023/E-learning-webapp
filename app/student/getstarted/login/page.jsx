@@ -1,13 +1,16 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Input } from "../../../../components/Forms/Input";
+import { Btn } from "../../../../components/Forms/Btn";
+
+import { loginApi } from "../../../../utils/Actions";
 
 const Signup = () => {
   const router = useRouter();
-  const handleContinue = () => {
-    router.push(`/student`);
-  };
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleLogin = () => {
     router.push(`/student/getstarted/login`);
@@ -16,19 +19,50 @@ const Signup = () => {
   const handleSignup = () => {
     router.push(`/student/getstarted`);
   };
-  
-  // Password states
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  
-  // Password strength states
-  
 
-  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState({
+    matric_no: "",
+    password: "",
+    role: "student"
+  });
 
   // Function to handle input change
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+  const handleInputChange = (e, name) => {
+    setValue({ ...value, [name]: e.target.value });
+  };
+
+  const Inputs = [
+    {
+      name: "matric_no",
+      type: "text",
+      placeholder: "Enter matric number",
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Enter password",
+    },
+  ]
+
+    
+  const handleContinue = async() => {
+
+    if(value.matric_no === "" || value.password === "") return 
+// CYS/ND/F22/3411
+    try {
+      setLoading(true);
+      const response = await loginApi(`api/auth/login`, value);
+      if (response.success) {
+        setErrorMsg("");
+        router.push(`/student/dashboard/${response.data._id}`);
+      } else {
+        setErrorMsg(response.message);
+      }
+    } catch (err) {
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,27 +73,31 @@ const Signup = () => {
           Welcome Back!
         </h1>
         <p className="text-sm text-primary mb-8">
-          Please <span onClick={handleLogin} className="underline cursor-pointer">login</span>/<span onClick={handleSignup} className="underline cursor-pointer">Signup</span> to your account.
+          Please{" "}
+          <span onClick={handleLogin} className="underline cursor-pointer">
+            login
+          </span>
+          /
+          <span onClick={handleSignup} className="underline cursor-pointer">
+            Signup
+          </span>{" "}
+          to your account.
         </p>
         <form className="w-full max-w-md">
           <p className="block text-gray-700 text-sm font-bold mb-2 text-center text-[18px]">
             Please enter your matriculation number
           </p>
-          <input
-            className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
-            id="matric-id"
-            type="text"
-            placeholder="Enter matric number"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
+          {
+            Inputs.map((input, i) => (
+              <Input
+              key={i}
+               {...input}
+                value={value[input.id]}
+                handleChange={handleInputChange}
+              />
 
-          <input
-            className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
-            id="password-id"
-            type="password"
-            placeholder="Enter your password"
-          />
+            ))
+          }
           <div className="flex justify-between items-center">
             <div className="gap-2 flex justify-between">
               <input type="checkbox" id="checkbox" className="" />
@@ -71,18 +109,16 @@ const Signup = () => {
             </div>
           </div>
 
+           {/* THIS DISPLAY THE ERROR MESSAGE */}
+           <div className="text-red-700 text-center font-bold">{errorMsg}</div>
+
           <div className="flex items-center justify-center mt-5">
-            <button
-              className={`font-normal py-3 px-10 w-[150px] focus:outline-none focus:shadow-outline rounded-full ${
-                inputValue
-                  ? "bg-primary text-white"
-                  : "bg-gray-300 text-[#A0A0A0]"
-              }`}
-              type="button"
-              onClick={handleContinue}
-            >
-              Login
-            </button>
+          <Btn
+              label="Login"
+              handleClick={handleContinue}
+              disabled={value.matric_no ? false : true}
+              loading={loading}
+            />
           </div>
         </form>
       </div>

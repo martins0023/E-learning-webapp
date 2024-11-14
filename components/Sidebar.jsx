@@ -3,33 +3,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 const Sidebar = () => {
   const [active, setActive] = useState('');
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setMounted(true); // Indicates that the component is mounted on the client-side
-    }
-  }, []);
+  const pathName = usePathname();
+
+  // console.log(pathName);
+
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     setMounted(true); // Indicates that the component is mounted on the client-side
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (mounted) {
-      const currentPath = window.location.pathname; // Get the current path
-      setActive(currentPath); // Set the full path as active
+    if (pathName) {
+      // const currentPath = window.location.pathname; // Get the current path
+      setActive(pathName); // Set the full path as active
     }
-  }, [mounted]);
+  });
 
   const handleMouseEnter = (path) => {
     setActive(path);
   };
 
   const handleMouseLeave = () => {
-    if (mounted) {
-      const currentPath = window.location.pathname;
-      setActive(currentPath);
-    }
+    // if (mounted) {
+    //   const currentPath = window.location.pathname;
+    //   setActive(currentPath);
+    // }
   };
 
   return (
@@ -40,16 +45,16 @@ const Sidebar = () => {
       <nav className="mt-5">
         <ul>
           {[
-            { name: 'Dashboard', path: '/dashboard', icon: '/assets/dashboard-icon-black.png' },
-            { name: 'Courses', path: '/dashboard/courses', icon: '/assets/courses-icon.png' },
-            { name: 'My Activity', path: '/dashboard/activity', icon: '/assets/activity-icon.png' },
-            { name: 'Time Table', path: '/dashboard/timetable', icon: '/assets/timetable-icon.png' },
-            { name: 'Inbox', path: '/dashboard/inbox', icon: '/assets/timetable-icon.png' },
-            { name: 'Submissions', path: '/dashboard/submissions', icon: '/assets/submissions-icon.png' },
-            { name: 'All Students', path: '/dashboard/all-students', icon: '/assets/students-icon.png' },
-            { name: 'Group', path: '/dashboard/group', icon: '/assets/students-icon.png' },
-            { name: 'Quiz', path: '/dashboard/quiz', icon: '/assets/quiz-icon.png' },
-            { name: 'Settings', path: '/dashboard/profile', icon: '/assets/settings-icon.png' },
+            { name: 'Dashboard', path: '/lecturer/dashboard', icon: '/assets/dashboard-icon-black.png' },
+            { name: 'Courses', path: '/lecturer/courses', icon: '/assets/courses-icon.png' },
+            { name: 'My Activity', path: '/lecturer/activity', icon: '/assets/activity-icon.png' },
+            { name: 'Time Table', path: '/lecturer/timetable', icon: '/assets/timetable-icon.png' },
+            { name: 'Inbox', path: '/lecturer/inbox', icon: '/assets/timetable-icon.png' },
+            { name: 'Submissions', path: '/lecturer/submissions', icon: '/assets/submissions-icon.png' },
+            { name: 'All Students', path: '/lecturer/all-students', icon: '/assets/students-icon.png' },
+            { name: 'Group', path: '/lecturer/group', icon: '/assets/students-icon.png' },
+            { name: 'Quiz', path: '/lecturer/quiz', icon: '/assets/quiz-icon.png' },
+            { name: 'Settings', path: '/lecturer/profile', icon: '/assets/settings-icon.png' },
           ].map((item, index) => (
             <li key={index} className="relative">
               <Link
@@ -76,6 +81,7 @@ const Sidebar = () => {
         </ul>
         <Image 
           src="/assets/diploma.png"
+          alt='Image'
           width={177}
           height={162}
           className="mb-10"

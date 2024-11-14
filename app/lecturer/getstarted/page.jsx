@@ -6,15 +6,15 @@ import { useRouter } from "next/navigation";
 const Signup = () => {
   const router = useRouter();
   const handleContinue = () => {
-    router.push(`/signup/createpassword`);
+    router.push(`/lecturer/getstarted/createpassword/123`);
   };
 
   const handleLogin = () => {
-    router.push(`/login`);
+    router.push(`/lecturer/getstarted/login`);
   };
 
   const handleSignup = () => {
-    router.push(`/signup`);
+    router.push(`/lecturer/getstarted`);
   };
 
   const [inputValue, setInputValue] = useState("");

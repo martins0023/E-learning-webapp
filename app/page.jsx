@@ -12,7 +12,7 @@ const Home = () => {
     router.push(`/role`);
   };
   return (
-    <section>
+    <section className="app">
       <AnimatePresence mode="wait">
         <Nav />
         <motion.div

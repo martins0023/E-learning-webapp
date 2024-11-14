@@ -4,20 +4,25 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import { usePathname } from 'next/navigation';
+
 const Sidebar = () => {
   const [active, setActive] = useState('');
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setMounted(true); // Indicates that the component is mounted on the client-side
-    }
-  }, []);
+  
+  const pathName = usePathname();
+
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     setMounted(true); // Indicates that the component is mounted on the client-side
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (mounted) {
-      const currentPath = window.location.pathname; // Get the current path
-      setActive(currentPath); // Set the full path as active
+    if (pathName) {
+      // const currentPath = window.location.pathname; // Get the current path
+      setActive(pathName); // Set the full path as active
     }
   }, [mounted]);
 
@@ -26,10 +31,10 @@ const Sidebar = () => {
   };
 
   const handleMouseLeave = () => {
-    if (mounted) {
-      const currentPath = window.location.pathname;
-      setActive(currentPath);
-    }
+    // if (mounted) {
+    //   const currentPath = window.location.pathname;
+    //   setActive(currentPath);
+    // }
   };
 
   return (
@@ -40,7 +45,7 @@ const Sidebar = () => {
       <nav className="mt-5">
         <ul>
           {[
-            { name: 'Dashboard', path: '/student', icon: '/assets/dashboard-icon-black.png' },
+            { name: 'Dashboard', path: '/student/dashboard', icon: '/assets/dashboard-icon-black.png' },
             { name: 'Courses', path: '/student/courses', icon: '/assets/courses-icon.png' },
             { name: 'My Activity', path: '/student/activity', icon: '/assets/activity-icon.png' },
             { name: 'Time Table', path: '/student/time-table', icon: '/assets/timetable-icon.png' },

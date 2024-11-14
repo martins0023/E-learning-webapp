@@ -2,11 +2,33 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { usePostApi } from "../../../utils/Actions";
+import { Btn } from "../../../components/Forms/Btn";
+import { Input } from "../../../components/Forms/Input";
 
 const Signup = () => {
   const router = useRouter();
-  const handleContinue = () => {
-    router.push(`/student/getstarted/createpassword`);
+  const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleContinue = async() => {
+    if(inputValue == "") return;
+    try {
+      setLoading(true);
+      const response = await usePostApi(`api/student/check-student`, {matric_no: inputValue})
+      if(response.success) {
+        setErrorMsg("")
+        router.push(`/student/getstarted/createpassword/${response.data?._id}`);
+      } else {
+        setErrorMsg(response.message)
+      }
+    } catch (err) {
+      setErrorMsg(err.message)
+    } finally {
+      setLoading(false);
+    }
+
   };
 
   const handleLogin = () => {
@@ -22,7 +44,6 @@ const Signup = () => {
 
   // Password strength states
 
-  const [inputValue, setInputValue] = useState("");
 
   // Function to handle input change
   const handleInputChange = (event) => {
@@ -30,6 +51,7 @@ const Signup = () => {
   };
 
   return (
+    <div className="w-full">
     <section className="flex h-screen bg-[#F9F9F9]">
       <div className="w-1/2 flex flex-col justify-center items-center p-10 bg-[#F9F9F9]">
         <img src="/assets/logo.png" alt="vconnet" className="mb-6" />
@@ -51,27 +73,12 @@ const Signup = () => {
           <p className="block text-gray-700 text-sm font-bold mb-2 text-center text-[18px]">
             Please enter your matriculation number
           </p>
-          <input
-            className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
-            id="matric-id"
-            type="text"
-            placeholder="Enter matric number"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
+          <Input handleChange={handleInputChange} id="matric_no" type="text" placeholder="Enter matric number" value={inputValue} />
+
+          <div className="text-red-700 text-center font-bold">{errorMsg}</div>
 
           <div className="flex items-center justify-center mt-5">
-            <button
-              className={`font-normal py-3 px-10 w-[150px] focus:outline-none focus:shadow-outline rounded-full ${
-                inputValue
-                  ? "bg-primary text-white"
-                  : "bg-gray-300 text-[#A0A0A0]"
-              }`}
-              type="button"
-              onClick={handleContinue}
-            >
-              Continue
-            </button>
+            <Btn label="Continue" handleClick={handleContinue} disabled={inputValue ? false : true} loading={loading} />
           </div>
         </form>
       </div>
@@ -81,6 +88,7 @@ const Signup = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

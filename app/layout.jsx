@@ -1,30 +1,26 @@
 import "../styles/globals.css";
 
-import Nav from "../components/Nav";
-import Provider from "../components/Provider";
-import Ball from "../components/Ball";
-
-export const metadata = {
-  title: "vconnect",
-  description:
-    "Welcome to Our Virtual Connect Platform, We're excited to have you here!",
-};
+// export const metadata = {
+//   title: "vconnect",
+//   description:
+//     "Welcome to Our Virtual Connect Platform, We're excited to have you here!",
+// };
 
 const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <Provider>
-          <div className="bg-white">
+        {/* <Provider> */}
+          {/* <div className="bg-white">
             <div className="bg-white" />
-          </div>
+          </div> */}
 
-          <main className="app">
+          {/* <main className=""> */}
             
             {children}
-          </main>
+          {/* </main> */}
           
-        </Provider>
+        {/* </Provider> */}
       </body>
     </html>
   );

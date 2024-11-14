@@ -2,7 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const Welcome = () => {
+
+
+
+const Welcome = async ({data}) => {
   return (
     <div className="flex flex-col items-center">
       <div className="mt-10">
@@ -19,34 +22,34 @@ const Welcome = () => {
       </div>
       <div className="mt-3 gap-3 items-center justify-center">
         <Image
-          src="/assets/images/profile.jpg"
+          src={data.image ? data.image : "/assets/images/user.png"}
           width={259}
           height={259}
           className="w-[259px] h-[259px] rounded-full"
           alt="profile"
         />
-        <p className="text-[26px] font-semibold text-primary text-center">
-          Ojo Kareem Oyewole
+        <p className="text-[26px] font-semibold text-primary text-center capitalize">
+          {data.lastname} {data.firstname} {data.middlename}
         </p>
 
         <div className="gap-[2px] mt-2">
           <p className="text-[24px] font-normal text-black text-center mt-1">
-            CS/HND/F22/3260
+            {data.matric_no}
           </p>
           <p className="text-[24px] font-normal text-black text-center mt-1">
-            Computer Science
+            {data.department}
           </p>
           <p className="text-[24px] font-normal text-black text-center mt-1">
-            HND 2
+            {data.level}
           </p>
         </div>
       </div>
       <div className="mt-5">
         <Link
-          href="/student"
+          href="/student/getstarted/login"
           className="flex items-center justify-center bg-primary text-white font-normal text-[20px] w-[691px] rounded-full h-[64px]"
         >
-          Go to Dashboard
+          Go to Login
         </Link>
       </div>
     </div>

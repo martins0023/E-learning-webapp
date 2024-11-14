@@ -83,7 +83,7 @@ const Role = () => {
             buttonEnabled
               ? selectedRole === "Student"
                 ? "/student/getstarted"
-                : "/signup"
+                : "lecturer/getstarted"
               : "#"
           }
           className={`flex items-center justify-center text-[#A0A0A0] font-normal text-[20px] w-[550px] rounded-full h-[64px] 

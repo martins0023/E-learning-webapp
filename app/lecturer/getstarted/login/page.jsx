@@ -1,10 +1,40 @@
 "use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { Btn } from "../../../../components/Forms/Btn";
 import { useRouter } from "next/navigation";
+import { Input } from '../../../../components/Forms/Input';
 
 const Login = () => {
   const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  
+  const [value, setValue] = useState({
+    staff_id: "",
+    password: "",
+    role: "lecturer"
+  });
+
+  const Inputs = [
+    {
+      name: "staff_id",
+      type: "text",
+      placeholder: "Enter Staff ID",
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Enter password",
+    },
+  ]
+
+  // Function to handle input change
+  const handleInputChange = (e, name) => {
+    setValue({ ...value, [name]: e.target.value });
+  };
 
   const handleLogin = () => {
     router.push(`/login`);
@@ -13,6 +43,12 @@ const Login = () => {
   const handleSignup = () => {
     router.push(`/signup`);
   };
+
+  const handleContinue = async () => {
+    router.push(`/lecturer/dashboard`);
+  }
+
+
   return (
     <section className="flex h-screen bg-[#F9F9F9]">
       <div className="w-1/2 flex flex-col justify-center items-center p-10 bg-[#F9F9F9]">
@@ -33,18 +69,17 @@ const Login = () => {
           <p className="block text-gray-700 text-sm font-bold mb-2 text-center text-[18px]" htmlFor="staff-id">
             Please enter your Staff Identity number
           </p>
-          <input
-            className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
-            id="staff-id"
-            type="text"
-            placeholder="Enter Staff ID"
-          />
-          <input
-            className="appearance-none border w-full py-3 px-4 text-gray-700 mb-4 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Enter your Password"
-          />
+          {
+            Inputs.map((input, i) => (
+              <Input
+              key={i}
+               {...input}
+                value={value[input.id]}
+                handleChange={handleInputChange}
+              />
+
+            ))
+          }
           <div className="flex items-center justify-between mb-6">
             <label className="flex items-center">
               <input className="mr-2 leading-tight" type="checkbox" />
@@ -52,21 +87,17 @@ const Login = () => {
             </label>
             <a href="#" className="text-sm text-[#B22222] hover:underline">Forgot Password?</a>
           </div>
-          <div className="flex items-center justify-between ml-5 mr-5">
-            <Link
-              href="/welcome"
-              className="bg-primary text-[#ffffff] font-bold py-3 px-10 focus:outline-none focus:shadow-outline rounded-full"
-              type="button"
-            >
-              Login
-            </Link>
-            <Link
-              href="/signup"
-              className="bg-white text-[#000000] font-bold py-3 px-10 rounded-full border-2 border-[#B22222] hover:bg-[#B22222] hover:text-white transition focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Signup
-            </Link>
+
+           {/* THIS DISPLAY THE ERROR MESSAGE */}
+           <div className="text-red-700 text-center font-bold">{errorMsg}</div>
+           
+         <div className="flex items-center justify-center mt-5">
+          <Btn
+              label="Login"
+              handleClick={handleContinue}
+              disabled={value.staff_id ? false : true}
+              loading={loading}
+            />
           </div>
         </form>
       </div>

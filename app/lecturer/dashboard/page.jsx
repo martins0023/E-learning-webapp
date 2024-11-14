@@ -1,23 +1,23 @@
 "use client";
-import DashboardNav from "./components/DashboardNav";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
+import DashboardNav from "../../../components/DashboardNav";
 
 const Dashboard = () => {
   const router = useRouter();
-  const handleAttendance = () => {
-    router.push(`/student/attendance`);
+  const handleGetstarted = () => {
+    router.push(`/dashboard/getstarted`);
   };
 
-  const JoinClass = (id) => {
-    router.push(`/student/courses/classroom/${id}/start`);
+  const JoinClass = () => {
+    router.push(`/dashboard/getstarted`);
   };
 
-  const ViewDetails = (id) => {
-    router.push(`/student/courses/${id}`);
+  const ViewDetails = () => {
+    router.push(`/dashboard/getstarted`);
   };
 
   const [isClient, setIsClient] = useState(false);
@@ -43,6 +43,7 @@ const Dashboard = () => {
             type: "spring",
             stiffness: 300,
           }}
+          
         >
           <div className="w-full p-6 bg-[#F9F9F9]">
             <div>
@@ -102,10 +103,10 @@ const Dashboard = () => {
                             <p className="text-white font-normal text-[12px]">{`${lecture.date}`}</p>
                           </div>
                           <div className="flex justify-between mt-4">
-                            <button onClick={JoinClass} className="text-[12px] bg-white w-[105px] rounded-sm h-[27px] text-primary justify-items-center text-center items-center">
+                            <button className="text-[12px] bg-white w-[105px] rounded-sm h-[27px] text-primary justify-items-center text-center items-center">
                               Join the Class
                             </button>
-                            <button onClick={ViewDetails} className="text-white text-[10px]">
+                            <button className="text-white text-[10px]">
                               View Details
                             </button>
                           </div>
@@ -204,23 +205,78 @@ const Dashboard = () => {
                             </p>
                           </div>
 
-                          <div className="flex flex-row items-center justify-between">
-                            <p className="text-[#8E1011] font-semibold text-[14px]">
-                              58%
-                            </p>
-                            <p className="text-black font-medium text-[10px]">
-                              Overall Attendance
-                            </p>
-                          </div>
-                          <div className="w-full bg-gray-200 h-[4px] mt-2">
-                        <div
-                          className="bg-primary h-[4px]"
-                          style={{ width: 130 }}
-                        ></div>
-                      </div>
-                          <button onClick={handleAttendance} className="text-black mt-3 underline text-[10px]">
+                          <p className="text-black font-medium text-[10px]">
+                            Check student attendance.
+                          </p>
+                          <button className="text-black mt-3 underline text-[10px]">
                             View summary
                           </button>
+                        </div>
+
+                        <div className="bg-white p-4 rounded-lg w-[301px]">
+                          <div className="flex flex-row items-center justify-items-center justify-between mb-3">
+                            <p className="font-medium text-black text-[20px]">
+                              Quick Upload
+                            </p>
+                            <Image
+                              src="/assets/add.png"
+                              className="w-[14px] h-[14px]"
+                              width={14}
+                              height={14}
+                            />
+                          </div>
+                          <form className="flex gap-4 flex-col">
+                            <div className="flex flex-row gap-4">
+                              <select className="mb-2 p-1 border rounded-full w-[63px] h-[27px] text-[8px] items-center justify-items-center">
+                                <option className="text-black text-[8px] font-normal">
+                                  Note
+                                </option>
+                                <option className="text-black text-[8px] font-normal">
+                                  Assignment
+                                </option>
+                              </select>
+                              <select className="mb-2 p-1 border rounded-full w-[63px] h-[27px] text-[8px] items-center justify-items-center">
+                                <option>Subject</option>
+                                <option>Cyber Security</option>
+                              </select>
+                              <div className="relative">
+                                <input
+                                  type="file"
+                                  id="fileInput"
+                                  className="hidden"
+                                />
+                                <label
+                                  htmlFor="fileInput"
+                                  className="flex items-center justify-center mb-2 p-1 border rounded-full w-[63px] h-[27px] text-[8px] text-black font-medium cursor-pointer"
+                                >
+                                  Attach
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="ml-1 h-3 w-3 text-black"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
+                                      d="M19 9l-7 7-7-7"
+                                    />
+                                  </svg>
+                                </label>
+                              </div>
+                            </div>
+                            <div className="border rounded-md h-[99px] relative">
+                              <textarea
+                                className="w-full h-full border-none rounded-md p-2 text-[10px] resize-none"
+                                placeholder="Type your message..."
+                              ></textarea>
+                              <button className="bg-[#8B0000] rounded-xl text-white absolute bottom-2 right-2 px-3 py-1 text-[10px]">
+                                SEND
+                              </button>
+                            </div>
+                          </form>
                         </div>
                       </div>
 
@@ -251,54 +307,38 @@ const Dashboard = () => {
                           <div className="flex flex-col gap-3">
                             {[
                               {
-                                title: "Dr Bello",
+                                title: "Mathematics for Cyber security",
                                 time: "4 mins ago",
                                 type: "Quiz",
                                 resources: ["Shared PDF"],
                                 icons: ["/assets/pdf.png"],
-                                image: ["/assets/images/profile.jpg"],
                               },
                               {
-                                title: "Dr Jimoh H",
+                                title: "Networking Essentials (NCC 311)",
                                 time: "4 mins ago",
                                 type: "Quiz",
                                 resources: [
                                   "Shared Ethical Hacking Notes & Study Material",
                                 ],
                                 icons: ["/assets/pdf.png", "/assets/doc.png"],
-                                image: ["/assets/images/profile.jpg"],
                               },
                               {
-                                title: "Dr Asakpa",
+                                title: "Networking Essentials (NCC 311)",
                                 time: "4 mins ago",
                                 type: "Quiz",
                                 resources: [
                                   "Shared Ethical Hacking Notes & Study Material",
                                 ],
                                 icons: ["/assets/pdf.png", "/assets/doc.png"],
-                                image: ["/assets/images/profile.jpg"],
                               },
                               // Add more items here as needed
                             ].map((item, index) => (
                               <ul className="mt-5" key={index}>
-                                <div className="flex flex-row items-center gap-2">
-                                <div className="flex flex-row gap-1 mt-1">
-                                  {item.image.map((images, iconIndex) => (
-                                    <Image
-                                      key={iconIndex}
-                                      src={images}
-                                      width={44}
-                                      height={44}
-                                      className="mt-1 rounded-full"
-                                      alt="Resource Icon"
-                                    />
-                                  ))}
-                                </div>
-                                <div className="">
-                                <li className="flex flex-row items-center justify-between text-black font-semibold text-[12px]">
-                                  <p>{item.title}</p>
-                                  
-                                  
+                                <li className="flex flex-row justify-between text-black font-semibold text-[12px]">
+                                  {item.title}
+                                  <p className="text-[#00000075] font-normal text-[8px]">
+                                    {item.time}
+                                  </p>
                                 </li>
                                 <p className="text-primary text-[8px] font-medium">
                                   {item.type}
@@ -323,10 +363,6 @@ const Dashboard = () => {
                                     />
                                   ))}
                                 </div>
-                                </div>
-                                </div>
-                                
-                                
                               </ul>
                             ))}
                           </div>
@@ -342,66 +378,70 @@ const Dashboard = () => {
 
                   {/* row 2 */}
                   <div className="flex flex-col mr-3">
-                    <div className="mt-6 w-[453px]">
+                    <div className="bg-[#636363] h-[128px] w-[453px] ">
+                      <div className="flex flex-row items-center justify-center mt-5 gap-8 ">
+                        <Image
+                          src="/assets/clock.png"
+                          width={80}
+                          height={80}
+                          alt="clock"
+                        />
+                        <div className="flex flex-col gap-2">
+                          <p className="text-white font-bold text-[16px]">
+                            Schedule time for class
+                          </p>
+                          <button
+                            onClick={handleGetstarted}
+                            className="h-[51px] font-semibold text-black bg-white rounded-full text-[16px]"
+                          >
+                            Get started
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6">
                       <p className="text-black font-bold text-[24px]">
                         Submissions
                       </p>
 
                       <div className="bg-white rounded-md mt-3">
                         <div className="p-5">
-                          <div className="flex flex-row items-center justify-between">
-                            <div className="flex flex-row gap-3">
-                              <Image
-                                src="/assets/icon1.png"
-                                width={30}
-                                height={30}
-                                className="w-[30px] h-[30px]"
-                                alt="submission"
-                              />
-                              <div className="flex flex-col gap-1">
-                                <p className="text-black font-semibold text-[12px]">
-                                  Cyber Security Assignment -1
-                                </p>
-                                <p className="text-black font-semibold text-[8px]">
-                                  02 July 2024 02:34 Pm
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="flex flex-row items-center gap-1">
-                              <Image
-                                src="/assets/pending.png"
-                                width={20}
-                                height={20}
-                                alt="pending"
-                                className="w-[20px] h-[20px]"
-                              />
-                              <p className="text-[#E7024D] font-semibold text-[10px]">
-                                10 Pending
+                          <div className="flex flex-row gap-3">
+                            <Image
+                              src="/assets/icon1.png"
+                              width={30}
+                              height={30}
+                              className="w-[30px] h-[30px]"
+                              alt="submission"
+                            />
+                            <div className="flex flex-col gap-1">
+                              <p className="text-black font-semibold text-[12px]">
+                                Cyber Security Assignment -1
+                              </p>
+                              <p className="text-black font-semibold text-[8px]">
+                                02 July 2024 02:34 Pm
                               </p>
                             </div>
-                          </div>
 
-                          <hr className="h-1 w-full text-black font-bold mt-2" />
-
-                          <div className="flex flex-row items-center justify-between">
-                            <div className="flex flex-row gap-3 mt-3">
+                            <div className="flex flex-row gap-1 ml-4">
                               <Image
-                                src="/assets/icon1.png"
-                                width={30}
-                                height={30}
-                                className="w-[30px] h-[30px]"
-                                alt="submission"
+                                src="/assets/pdf.png"
+                                width={24}
+                                height={24}
+                                alt="PDF"
+                                className="w-[24px] h-[24px]"
                               />
-                              <div className="flex flex-col gap-1">
-                                <p className="text-black font-semibold text-[12px]">
-                                  Cyber Security Assignment -1
-                                </p>
-                                <p className="text-black font-semibold text-[8px]">
-                                  02 July 2024 02:34 Pm
-                                </p>
-                              </div>
+                              <Image
+                                src="/assets/doc.png"
+                                width={24}
+                                height={24}
+                                alt="DOC"
+                                className="w-[24px] h-[24px]"
+                              />
                             </div>
+                          </div>
+                          <div className="flex flex-row relative">
                             <div className="flex flex-col gap-2 mt-1">
                               <div className="flex flex-row items-center gap-1">
                                 <Image
@@ -415,7 +455,91 @@ const Dashboard = () => {
                                   30 Submitted
                                 </p>
                               </div>
+                              <div className="flex flex-row items-center gap-1">
+                                <Image
+                                  src="/assets/pending.png"
+                                  width={20}
+                                  height={20}
+                                  alt="pending"
+                                  className="w-[20px] h-[20px]"
+                                />
+                                <p className="text-[#E7024D] font-semibold text-[10px]">
+                                  10 Submitted
+                                </p>
+                              </div>
                             </div>
+
+                            <p className="absolute bottom-2 right-2 text-black text-[10px] underline font-medium">
+                              View all
+                            </p>
+                          </div>
+                          <hr className="h-1 w-full text-black mt-2" />
+
+                          <div className="flex flex-row gap-3 mt-3">
+                            <Image
+                              src="/assets/icon1.png"
+                              width={30}
+                              height={30}
+                              className="w-[30px] h-[30px]"
+                              alt="submission"
+                            />
+                            <div className="flex flex-col gap-1">
+                              <p className="text-black font-semibold text-[12px]">
+                                Cyber Security Assignment -1
+                              </p>
+                              <p className="text-black font-semibold text-[8px]">
+                                02 July 2024 02:34 Pm
+                              </p>
+                            </div>
+
+                            <div className="flex flex-row gap-1 ml-4">
+                              <Image
+                                src="/assets/pdf.png"
+                                width={24}
+                                height={24}
+                                alt="PDF"
+                                className="w-[24px] h-[24px]"
+                              />
+                              <Image
+                                src="/assets/doc.png"
+                                width={24}
+                                height={24}
+                                alt="DOC"
+                                className="w-[24px] h-[24px]"
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-row relative">
+                            <div className="flex flex-col gap-2 mt-1">
+                              <div className="flex flex-row items-center gap-1">
+                                <Image
+                                  src="/assets/correct.png"
+                                  width={20}
+                                  height={20}
+                                  alt="correct"
+                                  className="w-[20px] h-[20px]"
+                                />
+                                <p className="text-[#4BAE4F] font-semibold text-[10px]">
+                                  30 Submitted
+                                </p>
+                              </div>
+                              <div className="flex flex-row items-center gap-1">
+                                <Image
+                                  src="/assets/pending.png"
+                                  width={20}
+                                  height={20}
+                                  alt="pending"
+                                  className="w-[20px] h-[20px]"
+                                />
+                                <p className="text-[#E7024D] font-semibold text-[10px]">
+                                  10 Submitted
+                                </p>
+                              </div>
+                            </div>
+
+                            <p className="absolute bottom-2 right-2 text-black text-[10px] underline font-medium">
+                              View all
+                            </p>
                           </div>
                         </div>
                       </div>
